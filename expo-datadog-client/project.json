@@ -1,0 +1,47 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/expo-datadog-client/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/expo-datadog-client/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "unit-test": {
+      "description": "This orchestrates jest command so it runs before jest-coverage-thresholds-bumper",
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "cwd": "libs/expo-datadog-client",
+        "summaryJson": "./dist/libs/expo-datadog-client/coverage-summary.json",
+        "coverageFile": "./jest.coverage.ts",
+        "command": "../../node_modules/.bin/jest-coverage-thresholds-bumper --coverage-summary-path {args.summaryJson}  --config-path {args.coverageFile} --margin=3 --silent"
+      },
+      "dependsOn": [
+        {
+          "target": "jest-command",
+          "projects": "self"
+        }
+      ]
+    },
+    "jest-command": {
+      "executor": "@nrwl/jest:jest",
+      "options": {
+        "jestConfig": "libs/expo-datadog-client/jest.config.ts",
+        "passWithNoTests": true,
+        "codeCoverage": true
+      },
+      "outputs": [
+        "{workspaceRoot}/coverage/libs/expo-datadog-client"
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export { isCompatibleWithDatadogNative } from './isCompatibleWithDatadogNative';

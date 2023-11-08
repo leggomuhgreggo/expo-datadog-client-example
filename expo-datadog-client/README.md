@@ -11,8 +11,24 @@ Datadog does not have a cross-platform RUM library. Instead, there are individua
 
 In addition, there're a couple of "companion libraries" that power some advanced features
 
-- [` @datadog/browser-logs`](https://docs.datadoghq.com/logs/log_collection/javascript/)
-- [`@datadog/mobile-react-native`](https://github.com/DataDog/dd-sdk-reactnative/tree/develop/packages/react-navigation)
+- [`@datadog/browser-logs`](https://docs.datadoghq.com/logs/log_collection/javascript/)
+- [`@datadog/mobile-react-native`]([https://github.com/DataDog/dd-sdk-reactnative/tree/develop/packages/react-navigation](https://github.com/DataDog/dd-sdk-reactnative/tree/develop))
+- [`@datadog/mobile-react-navigation`](https://github.com/DataDog/dd-sdk-reactnative/tree/develop/packages/react-navigation)
+
+
+#### Versions
+
+Works with these versions
+
+```json
+    "@datadog/browser-logs": "^5.0.0",
+    "@datadog/browser-rum": "5.1.0",
+    "@datadog/mobile-react-native": "^1.6.0",
+    "@datadog/mobile-react-navigation": "^1.6.0",
+    "expo-datadog": "^49.0.0",
+```
+
+
 
 ### Problem
 
@@ -68,12 +84,3 @@ export const initDatadog = async () => {
 };
 ```
 
-Works with these versions
-
-```json
-    "@datadog/browser-logs": "^5.0.0",
-    "@datadog/browser-rum": "5.1.0",
-    "@datadog/mobile-react-native": "^1.6.0",
-    "@datadog/mobile-react-navigation": "^1.6.0",
-    "expo-datadog": "^49.0.0",
-```

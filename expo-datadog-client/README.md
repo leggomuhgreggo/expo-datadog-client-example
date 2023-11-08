@@ -67,3 +67,13 @@ export const initDatadog = async () => {
   );
 };
 ```
+
+Works with these versions
+
+```json
+    "@datadog/browser-logs": "^5.0.0",
+    "@datadog/browser-rum": "5.1.0",
+    "@datadog/mobile-react-native": "^1.6.0",
+    "@datadog/mobile-react-navigation": "^1.6.0",
+    "expo-datadog": "^49.0.0",
+```

@@ -12,7 +12,7 @@ Datadog does not have a cross-platform RUM library. Instead, there are individua
 In addition, there're a couple of "companion libraries" that power some advanced features
 
 - [`@datadog/browser-logs`](https://docs.datadoghq.com/logs/log_collection/javascript/)
-- [`@datadog/mobile-react-native`]([https://github.com/DataDog/dd-sdk-reactnative/tree/develop/packages/react-navigation](https://github.com/DataDog/dd-sdk-reactnative/tree/develop))
+- [`@datadog/mobile-react-native`](https://github.com/DataDog/dd-sdk-reactnative/tree/develop)
 - [`@datadog/mobile-react-navigation`](https://github.com/DataDog/dd-sdk-reactnative/tree/develop/packages/react-navigation)
 
 

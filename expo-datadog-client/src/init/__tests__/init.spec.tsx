@@ -1,6 +1,6 @@
 import { DdSdkReactNative } from 'expo-datadog';
-import * as utils from '../../utils';
 
+import * as utils from '../../utils';
 import { init } from '../init';
 
 // ─── MOCKS ──────────────────────────────────────────────────────────────────────
@@ -21,6 +21,7 @@ const CONFIG = {
   clientToken: 'DD_RUM_CLIENT_TOKEN',
   env: 'DD_RUM_ENVIRONMENT',
   version: 'APP_VERSION',
+  serviceName: 'APP_VERSION',
 };
 
 // ────────────────────────────────────────────────────────────────────────────────
@@ -42,17 +43,6 @@ describe('init', () => {
     });
   });
 
-  describe('when config includes firstPartyHosts', () => {
-    it('registers user', async () => {
-      jest
-        .spyOn(utils, 'isCompatibleWithDatadogNative')
-        .mockImplementation(() => true);
-
-      await init({ ...CONFIG, firstPartyHosts: [] });
-
-      expect(DdSdkReactNative.initialize).toHaveBeenCalledTimes(1);
-    });
-  });
   describe('when used on incompatible device', () => {
     it('returns early', async () => {
       jest

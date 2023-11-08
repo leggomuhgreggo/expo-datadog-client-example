@@ -1,5 +1,6 @@
-import { datadogRum } from '@datadog/browser-rum';
 import { datadogLogs } from '@datadog/browser-logs';
+import { datadogRum } from '@datadog/browser-rum';
+
 import type { SetUser } from './setUser.types';
 
 /**

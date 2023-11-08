@@ -1,5 +1,6 @@
-import { DdRumReactNavigationTracking } from '@datadog/mobile-react-navigation';
 import { createNavigationContainerRef } from '@react-navigation/native';
+import { DdRumReactNavigationTracking } from '@datadog/mobile-react-navigation';
+
 import * as utils from '../../utils';
 import { trackViews } from '../trackViews';
 

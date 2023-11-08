@@ -1,48 +1,60 @@
-/* eslint-disable functional/immutable-data */
-
 import { DdSdkReactNative, DdSdkReactNativeConfiguration } from 'expo-datadog';
 
+import type { InitFn } from '../config';
+import { NATIVE_RUM_DEFAULTS } from '../config';
 import { isCompatibleWithDatadogNative } from '../utils';
-import { NATIVE_DEFAULTS } from '../config/config';
-import type { DatadogConfigInit } from '../config/types';
 
-export const init = async (options: DatadogConfigInit) => {
+export const init: InitFn = async (options, overrides) => {
   if (!isCompatibleWithDatadogNative()) return;
 
   // ────────────────────────────────────────────────────────────────────────────────
 
-  const opts = {
-    ...NATIVE_DEFAULTS,
+  const mergedOptions = {
+    ...NATIVE_RUM_DEFAULTS,
     ...options,
+    ...overrides?.rumNative,
   };
+
+  // ────────────────────────────────────────────────────────────────────────────────
+
+  const {
+    // ordered arguments to DdSdkReactNativeConfiguration
+    clientToken,
+    env,
+    applicationId,
+    trackInteractions,
+    trackResources,
+    trackErrors,
+
+    // this is applied after configuration has been initialized
+    ...postInitConfig
+  } = mergedOptions;
 
   // ────────────────────────────────────────────────────────────────────────────────
 
   // The RN datadog config is initialized with selected options, passed to a constructor as ordered arguments
   const config = new DdSdkReactNativeConfiguration(
-    opts.clientToken,
-    opts.env,
-    opts.applicationId,
-    opts.trackInteractions,
-    opts.trackResources,
-    opts.trackErrors,
+    clientToken,
+    env,
+    applicationId,
+    trackInteractions,
+    trackResources,
+    trackErrors,
   );
 
   // ────────────────────────────────────────────────────────────────────────────────
 
-  // Additional options are defined after the config object is initialized
-  opts.serviceName && (config.serviceName = opts.serviceName);
-  opts.site && (config.site = opts.site);
-  opts.verbosity && (config.verbosity = opts.verbosity);
-  opts.nativeCrashReportEnabled &&
-    (config.nativeCrashReportEnabled = opts.nativeCrashReportEnabled);
-  opts.sessionSamplingRate &&
-    (config.sessionSamplingRate = opts.sessionSamplingRate);
-  opts.resourceTracingSamplingRate &&
-    (config.resourceTracingSamplingRate = opts.resourceTracingSamplingRate);
-  opts.firstPartyHosts && (config.firstPartyHosts = opts.firstPartyHosts);
-
-  // ────────────────────────────────────────────────────────────────────────────────
-
-  return DdSdkReactNative.initialize(config);
+  await DdSdkReactNative.initialize({
+    ...config,
+    ...filterNullishEntries(postInitConfig),
+  });
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ──── Utils ────────────────────────────────────────────────────────────────────
+
+function filterNullishEntries(obj: Record<string, unknown>) {
+  return Object.entries(obj).reduce((acc, [key, val]) =>
+    val ? { ...acc, [key]: val } : acc,
+  );
+}

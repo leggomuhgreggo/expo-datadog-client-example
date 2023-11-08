@@ -46,4 +46,4 @@ type JSONValue =
   | boolean
   | null
   | readonly JSONValue[]
-  | { readonly [key: string]: JSONValue };
+  | Readonly<{ [key: string]: JSONValue }>;

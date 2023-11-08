@@ -1,4 +1,5 @@
 import { datadogRum } from '@datadog/browser-rum';
+
 import { logError } from '../logError';
 
 // ─── MOCKS ──────────────────────────────────────────────────────────────────────

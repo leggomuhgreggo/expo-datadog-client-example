@@ -14,14 +14,8 @@ const BASE_CONFIG = {
 export default {
   displayName: 'expo-datadog-client',
   coverageDirectory: nxPreset.coverageDirectory,
+  coverageReporters: nxPreset.coverageReporters,
 
-  coverageReporters: [
-    'json', // Used for storybook addon
-    'json-summary',
-    'text-summary', // Prints summary at end of tests
-    'lcov', // Report
-    'html', //  Report
-  ],
   projects: [
     { ...BASE_CONFIG, preset: 'jest-expo/ios' },
     { ...BASE_CONFIG, preset: 'jest-expo/android' },

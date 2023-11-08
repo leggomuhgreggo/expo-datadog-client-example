@@ -1,4 +1,5 @@
 import { DdSdkReactNative } from 'expo-datadog';
+
 import { isCompatibleWithDatadogNative } from '../utils';
 import type { SetUser } from './setUser.types';
 /**

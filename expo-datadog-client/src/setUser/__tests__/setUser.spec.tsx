@@ -1,6 +1,6 @@
 import { DdSdkReactNative } from 'expo-datadog';
-import * as utils from '../../utils';
 
+import * as utils from '../../utils';
 import { setUser } from '../setUser';
 
 // ─── MOCKS ──────────────────────────────────────────────────────────────────────

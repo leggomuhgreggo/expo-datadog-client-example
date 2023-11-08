@@ -1,5 +1,3 @@
-export type { DatadogConfigInit } from './config';
-
 import { init } from './init';
 import { logError } from './logError';
 import { setGlobalAttribute } from './setGlobalAttribute';

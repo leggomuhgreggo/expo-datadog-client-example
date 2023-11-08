@@ -1,4 +1,5 @@
 import { DdSdkReactNative } from 'expo-datadog';
+
 import { setGlobalAttribute } from '../setGlobalAttribute';
 
 // ─── MOCKS ───────────────────────────────────────────────────────────────────

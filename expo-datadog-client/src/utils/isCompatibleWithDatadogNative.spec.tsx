@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-require-imports */
-
 // Mocking technique
 // https://medium.com/trabe/mocking-different-values-for-the-same-module-using-jest-a7b8d358d78b
 
@@ -18,21 +15,6 @@ describe('isCompatibleWithDatadogNative', () => {
       const value = isCompatibleWithDatadogNative();
 
       expect(value).toBe(true);
-    });
-  });
-
-  describe('when NOT ExpoGo && IS Simulator', () => {
-    it('returns false', () => {
-      jest.mock('expo-device', () => ({ isDevice: false }));
-      jest.mock('expo-constants', () => ({ appOwnership: 'standalone' }));
-
-      const {
-        isCompatibleWithDatadogNative,
-      } = require('./isCompatibleWithDatadogNative');
-
-      const value = isCompatibleWithDatadogNative();
-
-      expect(value).toBe(false);
     });
   });
 

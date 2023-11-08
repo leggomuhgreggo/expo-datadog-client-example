@@ -1,7 +1,12 @@
+/**
+ * @jest-environment jsdom
+ * @jest-environment-options {"url": "https://jestjs.io/"}
+ */
+
 import { datadogLogs } from '@datadog/browser-logs';
 import { datadogRum } from '@datadog/browser-rum';
 
-import { init } from '../init';
+import { init } from '../init.web';
 
 // ─── MOCKS ──────────────────────────────────────────────────────────────────────
 
@@ -26,6 +31,7 @@ const CONFIG = {
   clientToken: 'DD_RUM_CLIENT_TOKEN',
   env: 'DD_RUM_ENVIRONMENT',
   version: 'APP_VERSION',
+  serviceName: 'APP_VERSION',
 };
 
 // ────────────────────────────────────────────────────────────────────────────────

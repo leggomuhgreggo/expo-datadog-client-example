@@ -1,6 +1,7 @@
 import { DdLogs } from 'expo-datadog';
-import { logError } from '../logError';
+
 import * as utils from '../../utils';
+import { logError } from '../logError';
 
 // ─── MOCKS ───────────────────────────────────────────────────────────────────
 

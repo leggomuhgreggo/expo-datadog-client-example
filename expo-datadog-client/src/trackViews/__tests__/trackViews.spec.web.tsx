@@ -1,5 +1,6 @@
-import { datadogLogs } from '@datadog/browser-logs';
 import { createNavigationContainerRef } from '@react-navigation/native';
+import { datadogLogs } from '@datadog/browser-logs';
+
 import { trackViews } from '../trackViews';
 
 // ─── MOCKS ──────────────────────────────────────────────────────────────────────

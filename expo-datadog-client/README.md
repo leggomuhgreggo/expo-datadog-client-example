@@ -31,3 +31,39 @@ Create abstractions to unify configuration and keep up with features enhancement
 | `logError`           | ✅           | ✅      | Sends datadog specific errors              |
 | `setGlobalAttribute` | ✅           | ✅      | Add custom entry to RUM session context    |
 | `trackViews`         | ✅           | shim    | `@datadog/browser-rum` has default support |
+
+## Implementation Notes
+
+Initially I tried to create a single abstraction for RUM client config, but I realized that the properties changed too much and weren't safe to assume as equivalent.
+
+So now I have a subset of core properties that are shared: env service applicationId clientToken version
+
+And for everything else I have platform-specific config objects, so my abstraction looks approximately like this:
+
+```tsx
+export const initDatadog = async () => {
+  await customDatadog.init(
+    {
+      applicationId: process.env.DD_RUM_APPLICATION_ID,
+      clientToken: process.env.DD_RUM_CLIENT_TOKEN,
+      env: process.env.DD_RUM_ENVIRONMENT,
+      serviceName: process.env.DD_SERVICE_NAME, // RN alias of `service`
+      version: process.env.APP_VERSION_DATADOG,
+    },
+    {
+      rumNative: {
+        firstPartyHosts: TRACING_ORIGINS,
+        sessionSamplingRate: 90,
+        resourceTracingSamplingRate: 90,
+        telemetrySampleRate: 90,
+      },
+      rumWeb: {
+        allowedTracingUrls: TRACING_ORIGINS,
+        sampleRate: 90,
+        sessionReplaySampleRate: 90,
+        telemetrySampleRate: 90,
+      },
+    }
+  );
+};
+```

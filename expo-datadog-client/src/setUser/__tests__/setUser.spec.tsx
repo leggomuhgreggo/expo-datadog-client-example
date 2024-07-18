@@ -41,7 +41,7 @@ describe('setUser', () => {
       setUser();
 
       expect(DdSdkReactNative.setUser).toHaveBeenCalledTimes(1);
-      expect(DdSdkReactNative.setUser).toHaveBeenCalledWith({ id: null });
+      expect(DdSdkReactNative.setUser).toHaveBeenCalledWith({ id: undefined });
     });
   });
 

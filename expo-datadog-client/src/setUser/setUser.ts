@@ -13,18 +13,18 @@ export const setUser: SetUser = async (id) => {
   if (!isCompatibleWithDatadogNative()) return;
 
   if (typeof id === 'string' && id?.length > 0) {
-    return registerUserSession(id);
+    return registerUser(id);
   }
 
-  return clearUserSession();
+  return clearUser();
 };
 
 // ────────────────────────────────────────────────────────────────────────────────
 
-const registerUserSession = async (id: string) => {
+const registerUser = async (id: string) => {
   return DdSdkReactNative.setUser({ id });
 };
 
-const clearUserSession = async () => {
-  return DdSdkReactNative.setUser({ id: null });
+const clearUser = async () => {
+  return DdSdkReactNative.setUser({ id: undefined });
 };

@@ -15,20 +15,18 @@ In addition, there're a couple of "companion libraries" that power some advanced
 - [`@datadog/mobile-react-native`](https://github.com/DataDog/dd-sdk-reactnative/tree/develop)
 - [`@datadog/mobile-react-navigation`](https://github.com/DataDog/dd-sdk-reactnative/tree/develop/packages/react-navigation)
 
-
 #### Versions
 
 Works with these versions
 
 ```json
-    "@datadog/browser-logs": "^5.0.0",
-    "@datadog/browser-rum": "5.1.0",
-    "@datadog/mobile-react-native": "^1.6.0",
-    "@datadog/mobile-react-navigation": "^1.6.0",
-    "expo-datadog": "^49.0.0",
+"@datadog/browser-logs": "^5.9.0",
+"@datadog/browser-rum": "^5.9.0",
+"@datadog/mobile-react-native": "^1.6.0",
+"@datadog/mobile-react-navigation": "^1.6.0",
+"expo-datadog": "^49.0.0",
+"@datadog/datadog-ci": "2.16.0",
 ```
-
-
 
 ### Problem
 
@@ -44,6 +42,7 @@ Create abstractions to unify configuration and keep up with features enhancement
 | -------------------- | ------------ | ------- | ------------------------------------------ |
 | `initDatadog`        | ✅           | ✅      | Starts datadog client                      |
 | `setUser`            | ✅           | ✅      | Updates Datadog session with user          |
+| `stopSession`        | ✅           | ✅      | Stops Datadog session with user (kiosk)    |
 | `logError`           | ✅           | ✅      | Sends datadog specific errors              |
 | `setGlobalAttribute` | ✅           | ✅      | Add custom entry to RUM session context    |
 | `trackViews`         | ✅           | shim    | `@datadog/browser-rum` has default support |
@@ -57,30 +56,37 @@ So now I have a subset of core properties that are shared: env service applicati
 And for everything else I have platform-specific config objects, so my abstraction looks approximately like this:
 
 ```tsx
+import { Platform } from 'react-native';
+import { datadog } from '@yourscope/expo-datadog-client';
+
+const TRACING_ORIGINS = [
+  process.env.API_ENDPOINT,
+  ...
+];
+
 export const initDatadog = async () => {
-  await customDatadog.init(
+  await datadog.init(
     {
       applicationId: process.env.DD_RUM_APPLICATION_ID,
       clientToken: process.env.DD_RUM_CLIENT_TOKEN,
-      env: process.env.DD_RUM_ENVIRONMENT,
-      serviceName: process.env.DD_SERVICE_NAME, // RN alias of `service`
+      env: process.env.DD_RUM_process.env,
+      serviceName: `cool-app-${Platform.OS}`,
       version: process.env.APP_VERSION_DATADOG,
     },
     {
       rumNative: {
         firstPartyHosts: TRACING_ORIGINS,
-        sessionSamplingRate: 90,
-        resourceTracingSamplingRate: 90,
-        telemetrySampleRate: 90,
+        sessionSamplingRate: 100,
+        resourceTracingSamplingRate: 100,
+        telemetrySampleRate: 100,
       },
       rumWeb: {
         allowedTracingUrls: TRACING_ORIGINS,
-        sampleRate: 90,
-        sessionReplaySampleRate: 90,
-        telemetrySampleRate: 90,
+        sessionSampleRate: 100,
+        sessionReplaySampleRate: 100,
+        telemetrySampleRate: 100,
       },
-    }
+    },
   );
 };
 ```
-

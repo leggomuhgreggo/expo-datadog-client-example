@@ -50,6 +50,7 @@ export const WEB_RUM_DEFAULTS: WebRumDefaults = {
   silentMultipleInit: true,
   trackUserInteractions: true, // called `trackInteractions` in React Native RUM config
   telemetrySampleRate: 100, // shared
+  defaultPrivacyLevel: 'mask-user-input',
 };
 type WebRumDefaults = Omit<Partial<WebConfigNormalized>, InitParamKeys>;
 

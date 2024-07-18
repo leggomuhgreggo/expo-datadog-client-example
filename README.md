@@ -1,6 +1,6 @@
 # expo-datadog-client
 
-> NOTE: FOR DEMONSTRATION PURPOSES ONLY.
+> NOTE: FOR DEMONSTRATION PURPOSES ONLY. USE HOWEVER YOU'D LIKE
 
 This is copied from a private monorepo. None of the dev / build functionality is hooked up.
 
